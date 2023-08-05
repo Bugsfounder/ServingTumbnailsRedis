@@ -1,3 +1,5 @@
+// handler/handler.go
+
 package handler
 
 import (
@@ -18,9 +20,16 @@ func NewApiHandler(router *gin.Engine) *ApiHandler {
 
 func (api *ApiHandler) RegisterApiHandlers() (int, error) {
 	api.server_ctxt.GET("/api", api.Index)
+
+	go api.PublishRandomImages()
+
 	return 1, nil
 }
 
 func (api *ApiHandler) Index(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, "Hello World")
+}
+
+func (api *ApiHandler) PublishRandomImages() {
+
 }
