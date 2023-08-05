@@ -2,6 +2,21 @@
 
 This documentation provides an overview of a codebase that demonstrates the integration of Redis Publish/Subscribe (Pub/Sub) mechanism in a Go backend (API publisher) and a Next.js frontend (API subscriber). The Pub/Sub mechanism allows real-time communication between different parts of an application by broadcasting messages to multiple subscribers.
 
+### Ensure Redis Server is Running
+Before proceeding, ensure that a Redis server is running on your device. If you don't have Redis set up, follow these steps:
+
+1. Pull the Redis Docker image:
+   ```bash
+   docker pull redis
+   ```
+
+2. Run the Redis Docker container:
+   ```bash
+   docker run --name redis-server -d -p 6379:6379 redis
+   ```
+
+This will set up a Redis server using Docker. Make sure to follow these steps if you need a Redis server for your application.
+
 ## 1. Pub/Sub Concept
 
 Redis Pub/Sub is a messaging paradigm where a publisher sends messages to a specific channel, and multiple subscribers listen to that channel to receive and react to messages. It enables asynchronous communication between different components of an application.
@@ -333,6 +348,9 @@ Received message in channel thumbnail: https://cdn.pixabay.com/photo/2015/04/23/
 1. The Go backend (`handler/handler.go`) publishes random image URLs to the "thumbnail" Redis channel using the `PublishRandomImage` method.
 2. The Next.js frontend (`pages/api/subscribe.js`) establishes an SSE connection to the `/api/subscribe` endpoint and listens for messages on the "thumbnail" channel.
 3. When a new image URL is published to the Redis channel, the frontend receives the message and updates the UI to display the image.
+
+
+
 
 ## 5. Conclusion
 
